@@ -23,14 +23,16 @@ def editDog(request, dogID):
     if request.method == "POST":
         # save stuff
         newUserEdittedForm = DogForm(request.POST, instance=instanceOfTheModel)
+        newUserEdittedForm.save()
         return HttpResponseRedirect("/dog/")
-    context = {
 
+    form = DogForm(instance=instanceOfTheModel)
+    context = {
+        "form": form
     }
     return render(request, "DogApp/editDogForm.html", context)
 
 def deleteDog(request, dogID):
-    context = {
-
-    }
-    return render(request, "DogApp/deleteDogForm.html", context)
+    instanceOfTheModel = DogModel.objects.get(pk=dogID)
+    instanceOfTheModel.delete()
+    return HttpResponseRedirect("/dog/")

@@ -6,5 +6,11 @@
 </head>
 <body>
 <h1>Edit Dog Below</h1>
+
+<form method="POST">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button>Submit</button>
+</form>
 </body>
 </html>
